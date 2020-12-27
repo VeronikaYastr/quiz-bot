@@ -1,18 +1,16 @@
 package quiz.bot.http
 
-import cats.effect.{Concurrent, Fiber, Sync}
+import cats.effect.Concurrent
 import cats.effect.concurrent.Ref
 import cats.implicits._
 import io.circe.generic.auto._
-import fs2.{Pipe, Stream}
 import org.http4s.circe._
 import org.http4s.dsl.Http4sDsl
 import org.http4s.{EntityDecoder, HttpRoutes}
 import quiz.bot.dao.CategoryDao
 import quiz.bot.dao.DaoModel.Question
-import quiz.bot.http.BotMsg._
 import quiz.bot.http.BotMsg.In.{Message, Update}
-import quiz.bot.http.BotMsg.Out.{InlineButtons, MessageResponse}
+import quiz.bot.http.BotMsg._
 import quiz.bot.utils.MessageText._
 
 
@@ -72,6 +70,10 @@ final class BotService[F[_]: Concurrent](
         processUpdate(update.message)
           .flatMap(_ => Ok())
       }
+  }
+
+  val routesGet: HttpRoutes[F] = HttpRoutes.of[F] {
+    case GET -> Root => Ok("Hello")
   }
 }
 
