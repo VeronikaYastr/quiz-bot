@@ -12,7 +12,6 @@ object MainTest {
     implicit val contextShift: ContextShift[IO] = IO.contextShift(ExecutionContext.global)
     implicit val timer: Timer[IO] = IO.timer(ExecutionContext.global)
 
-    val t = Stream.repeatEval()
     val r = Stream(1, 2, 3).evalMap(value => IO {println(value)}).delayBy(1.seconds)
 
     r.compile.drain.unsafeRunSync()

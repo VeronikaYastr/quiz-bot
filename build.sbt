@@ -1,3 +1,4 @@
+
 name := "quiz-bot"
 
 version := "0.1"
@@ -35,4 +36,7 @@ libraryDependencies ++= Seq(
 )
 
 addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.1" cross CrossVersion.full)
+enablePlugins(JavaAppPackaging)
+
+mainClass in Compile := Some("quiz.bot.Main")
 
